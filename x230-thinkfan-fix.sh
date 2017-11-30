@@ -4,20 +4,6 @@
 #
 # james byrnes, 2017
 
-# This is one of those "quick and dirty" fixes for a known but unfixed issue
-# related to the hwmon subdirs in /sys/devices/platform/coretemp.0 
-
-# Basically, one of the subdirectories under this folder will change between 
-# hwmon0, hwmon1, hwmon2, etc... between each reboot which will cause pre-v1.0
-# Thinkfan to fail for some Thinkpad models (like my X230) because it relies 
-# on knowing which directory this is. Apparently post-1.0 this is fixed through
-# using YAML configs so if you're looking for a clean solution, I highly
-# recommend that.
-
-# For the rest of us, however... :)
-
-# This needs to be run as root because we're touching systemd and files in /etc.
-
 # First, let's check with systemd to see if thinkfan started successfully
 
 THINKFAN_RESULT=$(systemctl show thinkfan.service | grep ^Result | cut -d "=" -f 2)
